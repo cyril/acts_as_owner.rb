@@ -1,0 +1,38 @@
+ActsAsOwner
+===========
+
+Provides to a user the ability to self-query about the possession of a given resource or a given account.
+
+Any resources belonging to an other resource which is owned by the user are considered such as owned by this user too.
+
+
+Install
+=======
+
+To install as a plugin:
+
+  script/plugin install git://github.com/cyril/acts_as_owner.git
+
+
+Example
+=======
+
+  class User < ActiveRecord::Base
+    acts_as_owner :categories, :articles, :comments
+  end
+
+  # Considering this article:
+  article = current_user.articles.first
+
+  # We can see that:
+  current_user.owns? article                     # => true
+  current_user.owns? article.user                # => true
+
+  # Now, check if its first comment is ours:
+  current_user.owns? article.comments.first.user # => false
+
+  # But even if it is not, this comment is a child of our article, so:
+  current_user.owns? article.comments.first      # => true
+
+
+Copyright (c) 2009 Cyril Wack, released under the MIT license
