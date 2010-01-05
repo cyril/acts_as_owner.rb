@@ -16,6 +16,10 @@ module ActiveRecord
             def self.owns_many
               reflections.select { |name, reflection| reflection.macro == :has_many }.collect { |table| table[0].to_s.singularize }
             end
+
+            def self.owns_one
+              reflections.select { |name, reflection| reflection.macro == :has_one }.collect { |table| table[0].to_s.singularize }
+            end
           EOV
         end
       end
@@ -36,7 +40,18 @@ module ActiveRecord
 
         # Returns true if the user owns the resource, otherwise returns false.
         def owns_this_resource?(resource)
-          self.respond_to?(resource.class.name.tableize) && self.send(resource.class.name.tableize).include?(resource) || parents_of(resource).collect { |parent| owns_this_resource?(parent) }.select { |result| result == true }.uniq.pop == true
+          (has_many?(resource) || has_one?(resource)) ||
+          parents_of(resource).collect { |parent| owns_this_resource?(parent) }.select { |result| result == true }.uniq.pop == true
+        end
+
+        # Has many association
+        def has_many?(resource)
+          self.respond_to?(resource.class.name.tableize) && self.send(resource.class.name.tableize).include?(resource)
+        end
+
+        # Has one association
+        def has_one?(resource)
+          self.respond_to?(resource.class.name.tableize.singularize) && self.send(resource.class.name.tableize.singularize) == resource
         end
 
         # Returns an array of resources that are:
@@ -46,9 +61,12 @@ module ActiveRecord
           potential_owners_of(resource).collect { |method| resource.send(method) }
         end
 
-        # Returns an array containing symbols common to children which belongs to self class and to parents which has many given resource.
+        # Returns an array containing symbols common to children
+        # which belongs to the current user and to parents which has many or has one given resource.
         def potential_owners_of(resource)
-          self.class.owns_many & resource.class.reflections.select { |name, reflection| reflection.macro == :belongs_to }.collect { |table| table[0].to_s }
+          self.class.owns_many & self.class.owns_one & resource.class.reflections.select do |name, reflection|
+            reflection.macro == :belongs_to
+          end.collect { |table| table[0].to_s }
         end
       end
     end
