@@ -23,6 +23,7 @@ module ActiveRecord
       module InstanceMethods
         # Returns true if the user owns the object which can be a account or a resource.  Otherwise returns false.
         def owns?(object = nil)
+          return false if object.nil?
           object.is_a?(self.class) ? self.owns_this_account?(object) : self.owns_this_resource?(object)
         end
 
