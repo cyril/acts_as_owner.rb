@@ -64,7 +64,7 @@ module ActiveRecord
         # Returns an array containing symbols common to children
         # which belongs to the current user and to parents which has many or has one given resource.
         def potential_owners_of(resource)
-          self.class.owns_many & self.class.owns_one & resource.class.reflections.select do |name, reflection|
+          (self.class.owns_many | self.class.owns_one) & resource.class.reflections.select do |name, reflection|
             reflection.macro == :belongs_to
           end.collect { |table| table[0].to_s }
         end
