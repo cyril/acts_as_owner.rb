@@ -1,0 +1,7 @@
+MIT-LICENSE
+README.rdoc
+Rakefile
+VERSION.yml
+init.rb
+lib/acts_as_owner.rb
+Manifest
