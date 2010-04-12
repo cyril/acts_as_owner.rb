@@ -4,4 +4,6 @@ coverage
 doc
 rdoc
 pkg
+*.gem
+*~
 
