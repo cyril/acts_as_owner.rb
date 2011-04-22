@@ -1,12 +1,12 @@
-require 'rubygems'
-require 'rake'
-require 'echoe'
+require 'bundler'
+Bundler::GemHelper.install_tasks
 
-Echoe.new('acts_as_owner', '1.2.0') do |p|
-  p.description    = "Simple Rails plugin that allows to operate freely on objects which belong to us."
-  p.url            = "http://github.com/cyril/acts_as_owner"
-  p.author         = "Cyril Wack"
-  p.email          = "cyril.wack@gmail.com"
-  p.ignore_pattern = ["tmp/*", "script/*"]
-  p.development_dependencies = []
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.test_files = FileList["test/**/*_{helper,test}.rb"]
 end
+
+task :default => :test
