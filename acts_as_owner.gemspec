@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = "acts_as_owner"
-  s.version     = Psych.load_file("VERSION.yml").values.join('.')
+  s.version     = YAML.load_file("VERSION.yml").values.join('.')
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Cyril Wack"]
-  s.email       = ["cyril@gosu.fr"]
+  s.email       = ["contact@cyril.io"]
   s.homepage    = "http://github.com/cyril/acts_as_owner"
   s.summary     = %q{Simple ownership solution for Rails.}
   s.description = %q{Simple Rails plugin that allows to operate freely on objects which belong to us.}
