@@ -1,4 +1,4 @@
-Acts as owner
+Acts as owner ![travis-ci](https://secure.travis-ci.org/cyril/acts_as_owner.png)
 =============
 
 Acts as owner is a plugin for Ruby on Rails that provides to an owner object the
