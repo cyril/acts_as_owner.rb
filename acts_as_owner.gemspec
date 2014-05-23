@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Cyril Wack"]
   s.email       = ["contact@cyril.io"]
-  s.homepage    = "http://github.com/cyril/acts_as_owner"
+  s.homepage    = "https://github.com/cyril/acts_as_owner.rb"
   s.summary     = %q{Simple ownership solution for Rails.}
   s.description = %q{Simple Rails plugin that allows to operate freely on objects which belong to us.}
 
