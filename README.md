@@ -1,5 +1,10 @@
-Acts as owner ![travis-ci](https://secure.travis-ci.org/cyril/acts_as_owner.png)
-=============
+# Acts as owner
+
+* * *
+
+**This gem is outdated.  Please do not use it.**
+
+* * *
 
 Acts as owner is a plugin for Ruby on Rails that provides to an owner object the
 ability to self-query about the possession of an ownable object.
@@ -10,13 +15,17 @@ belonging to an ownable object.
 Any ownable child, which belongs to an owned ownable parent, is also owned by
 the owner.
 
-Philosophy
-----------
+## Status
+
+[![Gem Version](https://badge.fury.io/rb/acts_as_owner.png)](http://badge.fury.io/rb/acts_as_owner)
+[![Build Status](https://api.travis-ci.org/cyril/acts_as_owner.rb.png?branch=master)](http://travis-ci.org/cyril/acts_as_owner?branch=master)
+![](https://ruby-gem-downloads-badge.herokuapp.com/acts_as_owner?type=total)
+
+## Philosophy
 
 General library that does only one thing, without any feature.
 
-Installation
-------------
+## Installation
 
 Include the gem in your `Gemfile`:
 
@@ -26,16 +35,14 @@ And run the `bundle` command.  Or as a plugin:
 
     rails plugin install git://github.com/cyril/acts_as_owner.git
 
-Getting started
----------------
+## Getting started
 
 ### Configuring models
 
 Owner models just have to be declared thanks to `acts_as_owner`, with each
 ownable object passed through a block (using `owns_one` or `owns_many` method).
 
-Example
--------
+## Example
 
 ``` ruby
 class User < ActiveRecord::Base
